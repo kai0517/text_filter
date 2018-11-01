@@ -2,19 +2,24 @@
 #include <Windows.h>
 #include <iostream>
 #include <sstream>
+#include <chrono>
 
 text_filter::text_filter(std::string const& text, std::string const& filter)
     : full_text(text)
 {
     create_filters(filter);
-    auto start = GetTickCount();
+    auto start = std::chrono::steady_clock::now();
     create_text_map(text);
-    auto end = GetTickCount();
-    std::cout << "Time to crate text map: " << end - start << std::endl;
+    auto end = std::chrono::steady_clock::now();
+    std::cout << "Time to crate text map: " 
+        << std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count() 
+        << std::endl;
     start = end;
     do_text_filters();
-    end = GetTickCount();
-    std::cout << "Time to filter text: " << end - start << std::endl;
+    end = std::chrono::steady_clock::now();;
+    std::cout << "Time to filter text: " 
+        << std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count() 
+        << std::endl;
 }
 
 void text_filter::create_filters(std::string const& filters) {
