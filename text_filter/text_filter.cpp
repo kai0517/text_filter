@@ -38,8 +38,8 @@ void text_filter::do_text_filters() {
 }
 
 void text_filter::do_single_text_filter(std::string const& filter) {
-    for (auto const& ch : filter) {
-        auto it = text_chars.find(ch);
+    if (!filter.empty()) {
+        auto it = text_chars.find(filter[0]);
         if (it != text_chars.end()) {
             find_matched_string(filter, it->second);
         }
