@@ -18,7 +18,6 @@ private:
     void do_text_filters();
     void do_single_text_filter(std::string const& filter);
     void find_matched_string(std::string const& filter, std::vector<size_t> const& poses);
-    bool is_text_matched(std::string const& filter, size_t pos);
 
     std::string full_text;
     char_map text_chars;

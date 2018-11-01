@@ -48,19 +48,10 @@ void text_filter::do_single_text_filter(std::string const& filter) {
 
 void text_filter::find_matched_string(std::string const& filter, std::vector<size_t> const& poses) {
     for (auto pos : poses) {
-        if (is_text_matched(filter, pos + 1)) {
+        if (!full_text.compare(pos, filter.length(), filter)) {
             match_poses[filter].push_back(pos);
         }
     }
-}
-
-bool text_filter::is_text_matched(std::string const& filter, size_t pos) {
-    for (size_t i = 1; i != filter.length(); ++i, ++pos) {
-        if (filter[i] != full_text[pos]) {
-            return false;
-        }
-    }
-    return true;
 }
 
 text_filter::~text_filter() {
